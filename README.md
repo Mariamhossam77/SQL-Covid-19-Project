@@ -51,7 +51,7 @@ select count(*) from Covid_Deaths;
 ```
 
 ### 3.Data Cleaning 🧹
-**Delete Nulls **: By Analyzing and exploring the data...when continent is NULL...the location value is continent instead of country,so delete these rows will increase data integrity .
+**Delete Nulls**: By Analyzing and exploring the data...when continent is NULL...the location value is continent instead of country,so delete these rows will increase data integrity .
 ```sql
 
 delete from Covid_Deaths where continent is null;
