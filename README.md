@@ -95,7 +95,7 @@ order by [Highest Infection Rate] desc;
 ```
 
 4. **Showing Countries With Highest Death Count Per Population**
-**THERE IS A PROBLEM IN COLUMN (TOTAL_DEATH) AS IT IS NVARCHAR(255),SO THE ORDER BY IS NOT ACCURATE**
+**....THERE IS A PROBLEM IN COLUMN (TOTAL_DEATH) AS IT IS NVARCHAR(255),SO THE ORDER BY IS NOT ACCURATE..**
 **THE SOLUTION IS CASTING THE TOTAL_DEATH COLUMN INTO INT**:
 ```sql
 select location,population,max(cast(total_deaths as bigint)) as [Number Of Death]
@@ -188,7 +188,7 @@ order by 1;
 
 
 12.**join covid vaccinations and covid deaths tables**
---I join two tables continuously. SO Let's do CTE(Common Table Expression)
+**...I join two tables continuously. SO Let's do CTE(Common Table Expression)**
 ```sql
 with covid_deaths_Vaccinations AS(
 select cd.continent,cd.location,cd.date,cd.population,cd.new_cases,cd.new_deaths,
@@ -212,8 +212,8 @@ order by location,date;
 ```
 
 14.**view total new_Vacination in each country..Using Aggregation Function**
-**I will use the CTE (covid_deaths_Vaccinations) I created previously
 ```sql
+--I will use the CTE (covid_deaths_Vaccinations) I created previously:
 
 select location,sum(convert(int,new_vaccinations)) AS [Total New vaccinations] 
 from covid_deaths_Vaccinations
@@ -222,7 +222,7 @@ order by [Total New vaccinations] desc;
 
 ```
 
---Alter new_vaccinations column into int instead of nvarchar to do aggregation functions easier
+**Alter new_vaccinations column into int instead of nvarchar to do aggregation functions easier.**
 
 ```sql
 ALTER TABLE Covid_Vaccinations ALTER COLUMN new_vaccinations INT;
@@ -263,7 +263,7 @@ select * from TotalPopulationView;
 ```
 
 
---Convert people_vaccinated from nvarchar to bigint
+**Convert people_vaccinated from nvarchar to bigint.**
 ```sql
 alter table Covid_Vaccinations alter column people_vaccinated  bigint;
 ```
