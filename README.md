@@ -13,9 +13,9 @@ To achieve these insights, I leveraged a wide range of SQL techniques, including
 
 ## Objectives
 
-q. **Data Cleaning**: Identify and remove any records with missing or null values.
-3. **Exploratory Data Analysis (EDA)**: Perform basic exploratory data analysis to understand the dataset.
-4. **Business Analysis**: Use SQL to answer specific business questions and derive insights from the sales data.
+1. **Data Cleaning**: Identify and remove any records with missing or null values.
+2. **Exploratory Data Analysis (EDA)**: Perform basic exploratory data analysis to understand the dataset.
+3. **Business Analysis**: Use SQL to answer specific business questions and derive insights from the sales data.
 
 ## Project Structure
 
@@ -30,7 +30,7 @@ CREATE DATABASE Covid 19;
 ### 2. Data Exploration 📊
 
 - **Record Count**: Determine the total number of records in the dataset.
-- **select Featured Columns** : select most important and used columns in table
+- **select Featured Columns** : select most important and used columns in table.
 - **Discover Problems**: Find out problems in dataset (Datatypes or Nulls).
 - **Null Value Check**: Check for any null values in the dataset and delete records with missing data.
 
@@ -50,7 +50,7 @@ select count(*) from Covid_Deaths;
 ```
 
 ### 3.Data Cleaning 🧹
-- **Delete Nulls **: By Analyzing and exploring the data...when continent is NULL...the location value is continent instead of country,so delete these rows will increase data integrity .
+**Delete Nulls **: By Analyzing and exploring the data...when continent is NULL...the location value is continent instead of country,so delete these rows will increase data integrity .
 ```sql
 
 delete from Covid_Deaths where continent is null;
@@ -60,13 +60,12 @@ select count(*) from Covid_Deaths;
 ```
 
 
-### 3.Answer Business Questions ❔❔
+### 4.Answer Business Questions ❔❔
 
 
 The following SQL queries were developed to answer specific business questions:
 
-1. **Total Cases VS Total Deaths
---1.show the Likelihood of dying if you contract covid in your country**:
+1. **Total Cases VS Total Deaths-show the Likelihood of dying if you contract covid in your country**:
 ```sql
 select location,date,total_cases,
 total_deaths,
@@ -76,8 +75,7 @@ where location like '%Egypt%'
 order by 1,2;
 ```
 
-2. **Total Cases VS Population
---2.Show What Persentage Of Population Got COVID Along Time **:
+2. **Total Cases VS Population-Show What Persentage Of Population Got COVID Along Time**:
 ```sql
 select location,date,total_cases,
 population,
@@ -86,7 +84,7 @@ from Covid_Deaths
 order by location,date ;
 ```
 
-3. **--3.Looking at the countries with the highest Infection Rate compared to Population**:
+3. **Looking at the countries with the highest Infection Rate compared to Population**:
 ```sql
 select location,population,MAX(total_cases) as [Total Cases],
 max(total_cases/population)*100 as [Highest Infection Rate]
@@ -95,9 +93,9 @@ group by location,population
 order by [Highest Infection Rate] desc;
 ```
 
-4. **--4.Showing Countries With Highest Death Count Per Population**
---**THERE IS A PROBLEM IN COLUMN (TOTAL_DEATH) AS IT IS NVARCHAR(255),SO THE ORDER BY IS NOT ACCURATE**
---**THE SOLUTION IS CASTING THE TOTAL_DEATH COLUMN INTO INT**:
+4. **Showing Countries With Highest Death Count Per Population**
+**THERE IS A PROBLEM IN COLUMN (TOTAL_DEATH) AS IT IS NVARCHAR(255),SO THE ORDER BY IS NOT ACCURATE**
+**THE SOLUTION IS CASTING THE TOTAL_DEATH COLUMN INTO INT**:
 ```sql
 select location,population,max(cast(total_deaths as bigint)) as [Number Of Death]
 from Covid_Deaths
@@ -105,7 +103,7 @@ group by location,population
 order by [Number Of Death] desc;
 ```
 
-5. **Show which month has most number of Infections**:
+5.**Show which month has most number of Infections**:
 ```sql
 select month(date) as Months ,sum(new_cases) as Total_new_cases_per_month from Covid_Deaths
 group by month(date)
@@ -118,10 +116,10 @@ select month(date) as Months ,sum(convert(int,new_deaths)) as Total_new_deaths_p
 group by month(date)
 order by month(date) desc
 ```
-**--NOTEEEE ➡➡➡➡➡ By Analyzing....december has most number of Infections and deaths**
+**NOTEEEE ➡➡➡➡➡ By Analyzing....december has most number of Infections and deaths**
 
 
-7. **.Show which Year has most number of Infections**:
+7. **Show which Year has most number of Infections**:
 ```sql
 select year(date) as Years ,sum(convert(int,new_cases)) as Total_new_cases_per_year from Covid_Deaths
 group by year(date)
@@ -135,9 +133,9 @@ group by year(date)
 order by Total_new_deaths_per_year desc
 
 ```
-**--NOTEEEE ➡➡➡➡➡ By Analyzing... 2020 has most number of Infections and deaths....Things got better in 2021**
+**NOTEEEE ➡➡➡➡➡ By Analyzing... 2020 has most number of Infections and deaths....Things got better in 2021**
 
-9. **--9.let's see which continent  has the highest number of death**:
+9. **let's see which continent  has the highest number of death**:
 ```sql
 select continent,max(cast(total_deaths as int)) AS [Number of Death]
 from Covid_Deaths
@@ -188,7 +186,7 @@ order by 1;
 ```
 
 
-12.**--join covid vaccinations and covid deaths tables**
+12.**join covid vaccinations and covid deaths tables**
 --I join two tables continuously. SO Let's do CTE(Common Table Expression)
 ```sql
 with covid_deaths_Vaccinations AS(
@@ -203,7 +201,7 @@ SELECT *
 FROM covid_deaths_Vaccinations;
 ```
 
-13.**13.look at the total population vs new_vaccination for every day**
+13.**look at the total population vs new_vaccination for every day**
 ```sql
 select cd.location,cd.date,population,cv.new_vaccinations from Covid_Deaths cd
 join Covid_Vaccinations cv
@@ -313,20 +311,21 @@ SELECT
 
 ## Findings
 
-- **Customer Demographics**: The dataset includes customers from various age groups, with sales distributed across different categories such as Clothing and Beauty.
-- **High-Value Transactions**: Several transactions had a total sale amount greater than 1000, indicating premium purchases.
-- **Sales Trends**: Monthly analysis shows variations in sales, helping identify peak seasons.
-- **Customer Insights**: The analysis identifies the top-spending customers and the most popular product categories.
+-**Infection and Vaccination Trends**: Identified that only 7.7% of the global population had been vaccinated by 2021, while tracking infection trends revealed the months with the highest number of COVID-19 cases and deaths.
+-**Global Impact Analysis**: Highlighted countries with the highest infection and death rates relative to their populations, alongside determining the continents most affected by COVID-19 fatalities.
+-**Population Infection Rates**: Calculated the percentage of the population infected over time, providing insights into the progression and intensity of the pandemic across different regions.
+-**Temporal Insights**: Leveraged date functions to uncover yearly and monthly trends, revealing critical periods of heightened infections and fatalities to support targeted interventions.
 
 ## Reports
 
-- **Sales Summary**: A detailed report summarizing total sales, customer demographics, and category performance.
-- **Trend Analysis**: Insights into sales trends across different months and shifts.
-- **Customer Insights**: Reports on top customers and unique customer counts per category.
+-**Infection and Mortality Analysis Report**: Detailed insights on total COVID-19 cases and deaths globally, broken down by countries, continents, and months, highlighting regions with the highest infection and mortality rates relative to their populations.
+-**Vaccination Progress Report**: Comprehensive data showing vaccination rates across countries and continents, including trends over time and insights into the percentage of the population vaccinated by 2021.
+-**Trend and Forecast Report**: Analysis of infection and death patterns over time, identifying months with the highest activity and offering cumulative rolling counts to understand pandemic progression and predict future hotspots.
 
 ## Conclusion
 
-This project serves as a comprehensive introduction to SQL for data analysts, covering database setup, data cleaning, exploratory data analysis, and business-driven SQL queries. The findings from this project can help drive business decisions by understanding sales patterns, customer behavior, and product performance.
+This project provides critical insights that can help governments and healthcare organizations make informed decisions to allocate resources effectively, implement targeted interventions, and develop strategies to mitigate the impact of future pandemics.
+
 
 ## How to Use
 
@@ -335,17 +334,4 @@ This project serves as a comprehensive introduction to SQL for data analysts, co
 3. **Run the Queries**: Use the SQL queries provided in the `analysis_queries.sql` file to perform your analysis.
 4. **Explore and Modify**: Feel free to modify the queries to explore different aspects of the dataset or answer additional business questions.
 
-## Author - Zero Analyst
 
-This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. If you have any questions, feedback, or would like to collaborate, feel free to get in touch!
-
-### Stay Updated and Join the Community
-
-For more content on SQL, data analysis, and other data-related topics, make sure to follow me on social media and join our community:
-
-- **YouTube**: [Subscribe to my channel for tutorials and insights](https://www.youtube.com/@zero_analyst)
-- **Instagram**: [Follow me for daily tips and updates](https://www.instagram.com/zero_analyst/)
-- **LinkedIn**: [Connect with me professionally](https://www.linkedin.com/in/najirr)
-- **Discord**: [Join our community to learn and grow together](https://discord.gg/36h5f2Z5PK)
-
-Thank you for your support, and I look forward to connecting with you!
