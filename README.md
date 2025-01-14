@@ -308,6 +308,7 @@ SELECT
   select
     round(((SELECT * FROM totalpeople_vaccinated)/(SELECT * FROM TotalPopulation))*100,1) as [percentage of people in the world are vaccinated]
 ```
+**NOTEEE ➡➡➡➡➡ only 7.7% of the population was vaccinated by 2021**
 
 
 ## Findings
