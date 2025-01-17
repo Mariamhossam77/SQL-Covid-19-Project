@@ -313,7 +313,7 @@ SELECT
 
 ## Findings
 
--**Infection and Vaccination Trends**: Identified that only 7.7% of the global population had been vaccinated by 2021, while tracking infection trends revealed the months with the highest number of COVID-19 cases and deaths.
+-**Infection and Vaccination Trends**: Identified that only 7.7% of the global population had been vaccinated by 2021, while tracking infection trends revealed the months with the highest number of COVID-19 cases and deaths.                                                                                                     
 -**Global Impact Analysis**: Highlighted countries with the highest infection and death rates relative to their populations, alongside determining the continents most affected by COVID-19 fatalities.
 -**Population Infection Rates**: Calculated the percentage of the population infected over time, providing insights into the progression and intensity of the pandemic across different regions.
 -**Temporal Insights**: Leveraged date functions to uncover yearly and monthly trends, revealing critical periods of heightened infections and fatalities to support targeted interventions.
