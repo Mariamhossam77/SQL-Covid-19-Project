@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-**Project Title**: Covid 19 Analysis   
-**Level**: ADVANCED 
-**Database**: `Covid 19 database`
+**Project Title**: Retail Sales Analysis  
+**Level**: B  
+**Database**: `Retail_Analysis`
 
 
 I worked on an advanced SQL project analyzing COVID-19 data, consisting of two tables with over 85,000 rows. The project involved extensive data exploration and cleaning, addressing null values using CASE statements and NULLIF, and ensuring data integrity with type conversions using CONVERT and CAST. I conducted in-depth analysis to answer critical business questions, such as identifying the total infected cases in my country, calculating the percentage of the population infected over time, and pinpointing countries with the highest infection and death rates relative to their populations. I also analyzed trends, such as identifying the months with the highest infections and deaths, as well as the continents most impacted by COVID-19 fatalities.
